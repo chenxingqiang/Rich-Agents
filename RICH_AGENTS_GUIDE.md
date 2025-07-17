@@ -2,7 +2,7 @@
 
 ## 📋 概述
 
-Rich-Agents是基于TradingAgents成功架构扩展的统一多智能体AI工具集，目前支持两个专业领域：
+Rich-Agents是基于 TradingAgents成功架构扩展的统一多智能体AI工具集，目前支持两个专业领域：
 
 - 🏦 **TradingAgent**: 金融交易分析框架
 - 🔬 **PatentAgent**: 专利智能体系统
@@ -13,7 +13,7 @@ Rich-Agents是基于TradingAgents成功架构扩展的统一多智能体AI工具
 
 ```bash
 # 克隆项目
-git clone https://github.com/TauricResearch/Rich-Agents.git
+git clone https://github.com/chenxingqiang/Rich-Agents.git
 cd Rich-Agents
 
 # 创建虚拟环境

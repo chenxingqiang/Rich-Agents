@@ -1,0 +1,59 @@
+{
+  "agent_type": "patent",
+  "analysis_types": [
+    "discovery",
+    "validation",
+    "analysis",
+    "writing"
+  ],
+  "default_analysis_type": "discovery",
+  "api_keys": {
+    "google_patents": "SERPAPI_API_KEY",
+    "zhihuiya": {
+      "client_id": "ZHIHUIYA_CLIENT_ID",
+      "client_secret": "ZHIHUIYA_CLIENT_SECRET"
+    }
+  },
+  "agents": {
+    "technology_analyst": {
+      "enabled": true
+    },
+    "innovation_discovery": {
+      "enabled": true
+    },
+    "prior_art_researcher": {
+      "enabled": true
+    },
+    "market_intelligence": {
+      "enabled": true
+    },
+    "patent_writer": {
+      "enabled": true
+    },
+    "quality_assessor": {
+      "enabled": true
+    }
+  },
+  "patent_databases": {
+    "google_patents": {
+      "enabled": true,
+      "max_results": 100,
+      "priority": 1
+    },
+    "zhihuiya": {
+      "enabled": true,
+      "max_results": 50,
+      "priority": 2
+    },
+    "uspto": {
+      "enabled": false,
+      "max_results": 50,
+      "priority": 3
+    },
+    "epo": {
+      "enabled": false,
+      "max_results": 50,
+      "priority": 4
+    }
+  }
+}

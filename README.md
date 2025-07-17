@@ -1,34 +1,34 @@
 
 ---
 
-# Rich-Agents: 多智能体AI工具集
+# Rich-Agents: 统一多智能体AI工具集
 
-> 🎉 **Rich-Agents** 正式发布！基于TradingAgents成功架构，我们将其扩展为统一的多智能体AI工具集。
+> 🎉 **Rich-Agents** - 基于TradingAgents成功架构扩展的统一多智能体AI工具集
 >
-> Rich-Agents目前支持两个专业领域：**TradingAgent**（金融交易分析）和**PatentAgent**（专利智能体）。
+> 当前支持两个专业领域：**TradingAgent**（金融交易分析）和**PatentAgent**（专利智能体系统）
 
 <div align="center">
-<a href="https://www.star-history.com/#TauricResearch/TradingAgents&Date">
+<a href="https://www.star-history.com/#chenxingqiang/TradingAgents&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=TauricResearch/TradingAgents&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=TauricResearch/TradingAgents&type=Date" />
-   <img alt="TradingAgents Star History" src="https://api.star-history.com/svg?repos=TauricResearch/TradingAgents&type=Date" style="width: 80%; height: auto;" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=chenxingqiang/TradingAgents&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=chenxingqiang/TradingAgents&type=Date" />
+   <img alt="TradingAgents Star History" src="https://api.star-history.com/svg?repos=chenxingqiang/TradingAgents&type=Date" style="width: 80%; height: auto;" />
  </picture>
 </a>
 </div>
 
 <div align="center">
 
-🚀 [Rich-Agents](#rich-agents-框架) | ⚡ [安装使用](#installation-and-cli) | 🏦 [TradingAgent](#tradingagent-金融交易分析) | 🔬 [PatentAgent](#patentagent-专利智能体) | 🤝 [贡献](#contributing) | 📄 [引用](#citation)
+🚀 [快速开始](#快速开始) | 📦 [安装指南](#安装指南) | 🏦 [TradingAgent](#tradingagent-金融交易分析) | 🔬 [PatentAgent](#patentagent-专利智能体) | 🤝 [贡献](#contributing) | 📄 [引用](#citation)
 
 </div>
 
-## Rich-Agents 框架
+## 🌟 Rich-Agents 框架概览
 
-Rich-Agents是一个统一的多智能体AI工具集，目前支持两个专业领域：
+Rich-Agents是一个统一的多智能体AI工具集，采用模块化架构设计，支持多个专业领域：
 
 ### 🏦 TradingAgent - 金融交易分析框架
-基于真实交易公司的运作模式，通过专业的LLM驱动智能体协作：基本面分析师、情绪专家、技术分析师、交易员、风险管理团队等，共同评估市场条件并做出交易决策。这些智能体通过动态讨论来确定最优策略。
+基于真实交易公司的运作模式，通过专业的LLM驱动智能体协作：基本面分析师、情绪专家、技术分析师、交易员、风险管理团队等，共同评估市场条件并做出交易决策。
 
 ### 🔬 PatentAgent - 专利智能体系统  
 将AI技术深度应用于知识产权领域，提供专利发现、验证、分析与撰写的完整解决方案。通过技术分析师、创新发现师、先行技术研究员、专利撰写员等智能体协作，实现从创新发现到专利申请的全流程自动化。
@@ -37,72 +37,64 @@ Rich-Agents是一个统一的多智能体AI工具集，目前支持两个专业�
   <img src="assets/schema.png" style="width: 100%; height: auto;">
 </p>
 
-> TradingAgents framework is designed for research purposes. Trading performance may vary based on many factors, including the chosen backbone language models, model temperature, trading periods, the quality of data, and other non-deterministic factors. [It is not intended as financial, investment, or trading advice.](https://tauric.ai/disclaimer/)
+> ⚠️ **免责声明**: TradingAgents框架仅用于研究目的。交易表现可能因多种因素而异，包括所选的语言模型、模型温度、交易周期、数据质量和其他非确定性因素。[本框架不构成财务、投资或交易建议。](https://tauric.ai/disclaimer/)
 
-Our framework decomposes complex trading tasks into specialized roles. This ensures the system achieves a robust, scalable approach to market analysis and decision-making.
+## 🚀 快速开始
 
-### Analyst Team
-- Fundamentals Analyst: Evaluates company financials and performance metrics, identifying intrinsic values and potential red flags.
-- Sentiment Analyst: Analyzes social media and public sentiment using sentiment scoring algorithms to gauge short-term market mood.
-- News Analyst: Monitors global news and macroeconomic indicators, interpreting the impact of events on market conditions.
-- Technical Analyst: Utilizes technical indicators (like MACD and RSI) to detect trading patterns and forecast price movements.
-
-<p align="center">
-  <img src="assets/analyst.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Researcher Team
-- Comprises both bullish and bearish researchers who critically assess the insights provided by the Analyst Team. Through structured debates, they balance potential gains against inherent risks.
-
-<p align="center">
-  <img src="assets/researcher.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Trader Agent
-- Composes reports from the analysts and researchers to make informed trading decisions. It determines the timing and magnitude of trades based on comprehensive market insights.
-
-<p align="center">
-  <img src="assets/trader.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Risk Management and Portfolio Manager
-- Continuously evaluates portfolio risk by assessing market volatility, liquidity, and other risk factors. The risk management team evaluates and adjusts trading strategies, providing assessment reports to the Portfolio Manager for final decision.
-- The Portfolio Manager approves/rejects the transaction proposal. If approved, the order will be sent to the simulated exchange and executed.
-
-<p align="center">
-  <img src="assets/risk.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-## 安装使用
-
-### 安装
-
-克隆Rich-Agents项目:
+### 基础安装
 ```bash
-git clone https://github.com/TauricResearch/Rich-Agents.git
-cd Rich-Agents
+# 克隆仓库
+git clone https://github.com/chenxingqiang/TradingAgents.git
+cd TradingAgents
+
+# 基础安装
+pip install -e .
+
+# 或使用uv安装（推荐）
+uv sync
 ```
 
-创建虚拟环境:
+### 启动Rich-Agents
 ```bash
-conda create -n rich-agents python=3.10+
-conda activate rich-agents
+# 启动统一CLI界面
+rich-agents
+
+# 或直接运行
+python main.py
 ```
 
-安装基础依赖:
-```bash
-pip install -r requirements.txt
+### 选择智能体系统
+```
+🎯 欢迎使用 Rich-Agents 多智能体AI工具集！
+
+请选择您要使用的智能体系统：
+1. 🏦 TradingAgent - 金融交易分析
+2. 🔬 PatentAgent - 专利智能体 
+3. ⚙️  系统配置和状态检查
+4. 📖 查看使用指南
+
+请输入您的选择 (1-4): 
 ```
 
-### 选择性安装
+## 📦 安装指南
 
-根据需要安装特定模块:
+Rich-Agents支持多种安装方式，您可以根据需要选择：
 
+### 1. 完整安装（推荐）
 ```bash
-# 仅安装TradingAgent模块
+# 安装所有功能
+pip install -e ".[all]"
+
+# 或使用uv
+uv sync --all-extras
+```
+
+### 2. 按需安装
+```bash
+# 仅安装TradingAgent
 pip install -e ".[trading]"
 
-# 仅安装PatentAgent模块  
+# 仅安装PatentAgent
 pip install -e ".[patent]"
 
 # 安装中文市场支持
@@ -111,149 +103,243 @@ pip install -e ".[chinese]"
 # 安装数据库支持
 pip install -e ".[database]"
 
-# 安装所有功能
-pip install -e ".[all]"
+# 安装可视化支持
+pip install -e ".[visualization]"
 ```
 
-### API配置
-
-#### LLM提供商API密钥
+### 3. 开发环境安装
 ```bash
-# 百炼大模型 (推荐)
-export DASHSCOPE_API_KEY=$YOUR_DASHSCOPE_API_KEY
+# 开发环境（包含测试工具）
+pip install -e ".[development]"
 
-# OpenAI
-export OPENAI_API_KEY=$YOUR_OPENAI_API_KEY
-
-# Google Gemini  
-export GOOGLE_API_KEY=$YOUR_GOOGLE_API_KEY
-
-# Anthropic Claude
-export ANTHROPIC_API_KEY=$YOUR_ANTHROPIC_API_KEY
+# 运行测试
+pytest tests/
 ```
 
-#### TradingAgent专用API
+### 4. 使用uv安装（推荐）
 ```bash
-# 金融数据
-export FINNHUB_API_KEY=$YOUR_FINNHUB_API_KEY
+# 安装uv
+pip install uv
+
+# 使用uv安装项目
+uv sync
+
+# 选择性安装
+uv sync --extra trading
+uv sync --extra patent
+uv sync --extra all
 ```
 
-#### PatentAgent专用API
-```bash
-# Google Patents检索
-export SERPAPI_API_KEY=$YOUR_SERPAPI_API_KEY
+## 🏦 TradingAgent - 金融交易分析
 
-# 智慧芽专利数据
-export ZHIHUIYA_CLIENT_ID=$YOUR_ZHIHUIYA_CLIENT_ID
-export ZHIHUIYA_CLIENT_SECRET=$YOUR_ZHIHUIYA_CLIENT_SECRET
-```
+### 核心智能体团队
 
-### 使用方法
+#### 分析师团队
+- **基本面分析师**: 评估公司财务和业绩指标，识别内在价值和潜在风险
+- **情绪分析师**: 分析社交媒体和公众情绪，使用情绪评分算法评估短期市场情绪
+- **新闻分析师**: 监控全球新闻和宏观经济指标，解读事件对市场状况的影响
+- **技术分析师**: 利用技术指标（如MACD和RSI）检测交易模式并预测价格走势
 
-#### Rich-Agents统一CLI
+#### 研究团队
+- **多头研究员**: 专注于发现买入机会，构建看涨论证
+- **空头研究员**: 识别卖出信号，构建看跌论证
+- **研究经理**: 协调研究活动，整合不同观点
+
+#### 交易执行团队
+- **交易员**: 基于分析团队的建议执行交易决策
+- **风险管理员**: 监控投资组合风险，确保风险控制
+
+### 使用示例
 ```bash
-python main.py
-```
-或者
-```bash
+# 启动TradingAgent
 rich-agents
+# 选择选项1: TradingAgent
+
+# 或直接使用TradingAgent CLI
+python -m cli.trading_cli
 ```
 
-您将看到统一的选择界面，可以选择TradingAgent或PatentAgent。
+### 支持的数据源
+- **美国市场**: Yahoo Finance, Finnhub, EODHD
+- **中国市场**: AkShare, Tushare, TDX
+- **新闻数据**: Google News, Reddit, 实时新闻API
+- **社交媒体**: Twitter情绪分析, Reddit讨论分析
 
-#### 直接使用特定模块
+## 🔬 PatentAgent - 专利智能体
+
+### 核心功能
+
+#### 1. 专利发现
+- **技术趋势分析**: 基于专利数据和文献分析技术发展趋势
+- **创新空白识别**: 自动发现技术领域中的专利空白
+- **交叉领域创新**: 识别跨领域技术融合的创新机会
+
+#### 2. 专利验证
+- **先行技术检索**: 全面检索相关专利和技术文献
+- **可行性评估**: 评估专利申请的技术可行性
+- **侵权风险分析**: 评估专利申请的侵权风险
+
+#### 3. 专利分析
+- **专利价值评估**: 多维度评估专利的技术和商业价值
+- **竞争态势分析**: 分析技术领域的专利竞争格局
+- **专利族分析**: 追踪专利家族的全球布局
+
+#### 4. 专利撰写
+- **权利要求生成**: 自动生成多层次的权利要求
+- **技术描述优化**: 确保技术描述的准确性和完整性
+- **文档格式化**: 符合专利局标准的申请文档
+
+### 智能体团队
+
+#### 分析师团队
+- **技术分析师**: 分析目标技术领域的发展趋势和技术成熟度
+- **创新发现师**: 从技术动态和学术论文中发现潜在创新点
+- **先行技术研究员**: 深度检索相关专利和技术文献
+- **市场情报分析师**: 分析技术的商业价值和市场接受度
+
+#### 研究团队
+- **创新推进研究员**: 论证创新方案的技术优势和实施可行性
+- **风险评估研究员**: 识别技术风险和专利侵权风险
+- **专利策略管理员**: 综合分析，制定专利申请策略
+
+#### 执行团队
+- **专利撰写员**: 基于分析结果撰写高质量专利申请文档
+- **质量评估师**: 评估专利申请的质量和获权可能性
+
+### 使用示例
 ```bash
-# 直接启动TradingAgent
-rich-agents --agent trading
+# 启动PatentAgent
+rich-agents
+# 选择选项2: PatentAgent
 
-# 直接启动PatentAgent  
-rich-agents --agent patent
-
-# 运行TradingAgent示例
-python main.py --trading-example
+# 技术领域示例
+技术领域: 人工智能
+技术方向: 计算机视觉
+创新主题: 深度学习图像识别
 ```
 
-#### 传统TradingAgent CLI
+### 支持的数据源
+- **专利数据库**: Google Patents, USPTO, EPO, 智慧芽
+- **学术文献**: IEEE Xplore, ACM Digital Library, arXiv
+- **技术新闻**: TechCrunch, MIT Technology Review
+- **行业报告**: Gartner, IDC技术趋势报告
+
+## ⚙️ 配置管理
+
+Rich-Agents使用统一的配置管理系统，支持多种LLM提供商：
+
+### 支持的LLM提供商
+- **百炼(通义千问)**: 阿里云百炼平台
+- **OpenAI**: GPT-3.5, GPT-4系列
+- **Google**: Gemini Pro, Gemini Ultra
+- **Anthropic**: Claude 3系列
+
+### 配置文件
 ```bash
-python -m cli.main
+# 查看配置状态
+rich-agents
+# 选择选项3: 系统配置和状态检查
+
+# 配置文件位置
+~/.rich_agents/config.json
 ```
 
-<p align="center">
-  <img src="assets/cli/cli_init.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
+### 环境变量配置
+```bash
+# LLM API密钥
+export DASHSCOPE_API_KEY="your_dashscope_key"
+export OPENAI_API_KEY="your_openai_key"
+export GOOGLE_API_KEY="your_google_key"
+export ANTHROPIC_API_KEY="your_anthropic_key"
 
-An interface will appear showing results as they load, letting you track the agent's progress as it runs.
-
-<p align="center">
-  <img src="assets/cli/cli_news.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-<p align="center">
-  <img src="assets/cli/cli_transaction.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-## TradingAgents Package
-
-### Implementation Details
-
-We built TradingAgents with LangGraph to ensure flexibility and modularity. We utilize `o1-preview` and `gpt-4o` as our deep thinking and fast thinking LLMs for our experiments. However, for testing purposes, we recommend you use `o4-mini` and `gpt-4.1-mini` to save on costs as our framework makes **lots of** API calls.
-
-### Python Usage
-
-To use TradingAgents inside your code, you can import the `tradingagents` module and initialize a `TradingAgentsGraph()` object. The `.propagate()` function will return a decision. You can run `main.py`, here's also a quick example:
-
-```python
-from tradingagents.graph.trading_graph import TradingAgentsGraph
-from tradingagents.default_config import DEFAULT_CONFIG
-
-ta = TradingAgentsGraph(debug=True, config=DEFAULT_CONFIG.copy())
-
-# forward propagate
-_, decision = ta.propagate("NVDA", "2024-05-10")
-print(decision)
+# 数据源API密钥
+export FINNHUB_API_KEY="your_finnhub_key"
+export EODHD_API_KEY="your_eodhd_key"
+export SERPAPI_API_KEY="your_serpapi_key"
+export ZHIHUIYA_API_KEY="your_zhihuiya_key"
 ```
 
-You can also adjust the default configuration to set your own choice of LLMs, debate rounds, etc.
+## 🏗️ 架构设计
 
-```python
-from tradingagents.graph.trading_graph import TradingAgentsGraph
-from tradingagents.default_config import DEFAULT_CONFIG
-
-# Create a custom config
-config = DEFAULT_CONFIG.copy()
-config["deep_think_llm"] = "gpt-4.1-nano"  # Use a different model
-config["quick_think_llm"] = "gpt-4.1-nano"  # Use a different model
-config["max_debate_rounds"] = 1  # Increase debate rounds
-config["online_tools"] = True # Use online tools or cached data
-
-# Initialize with custom config
-ta = TradingAgentsGraph(debug=True, config=config)
-
-# forward propagate
-_, decision = ta.propagate("NVDA", "2024-05-10")
-print(decision)
+### 统一架构
+```
+Rich-Agents/
+├── shared/                 # 共享基础设施
+│   ├── config/            # 统一配置管理
+│   └── llm_adapters/      # 统一LLM适配器
+├── cli/                   # 统一CLI系统
+│   ├── rich_agents_main.py    # 主CLI入口
+│   ├── rich_agents_simple.py  # 简化CLI
+│   ├── trading_cli.py          # TradingAgent CLI
+│   └── patent_cli.py           # PatentAgent CLI
+├── tradingagents/         # TradingAgent模块
+├── patentagents/          # PatentAgent模块
+└── tests/                 # 测试套件
 ```
 
-> For `online_tools`, we recommend enabling them for experimentation, as they provide access to real-time data. The agents' offline tools rely on cached data from our **Tauric TradingDB**, a curated dataset we use for backtesting. We're currently in the process of refining this dataset, and we plan to release it soon alongside our upcoming projects. Stay tuned!
+### 模块化设计
+- **共享基础设施**: 配置管理、LLM适配器、缓存系统
+- **独立智能体模块**: 每个智能体系统独立开发和维护
+- **统一CLI界面**: 提供一致的用户体验
+- **可扩展架构**: 支持未来添加新的智能体系统
 
-You can view the full list of configurations in `tradingagents/default_config.py`.
+## 🧪 测试
 
-## Contributing
+Rich-Agents包含完整的测试套件：
 
-We welcome contributions from the community! Whether it's fixing a bug, improving documentation, or suggesting a new feature, your input helps make this project better. If you are interested in this line of research, please consider joining our open-source financial AI research community [Tauric Research](https://tauric.ai/).
+```bash
+# 运行所有测试
+pytest tests/
 
-## Citation
+# 运行特定测试
+pytest tests/test_rich_agents_integration.py
+pytest tests/test_trading_agents.py
+pytest tests/test_patent_agents.py
 
-Please reference our work if you find *TradingAgents* provides you with some help :)
-
+# 查看测试覆盖率
+pytest --cov=. tests/
 ```
-@misc{xiao2025tradingagentsmultiagentsllmfinancial,
-      title={TradingAgents: Multi-Agents LLM Financial Trading Framework}, 
-      author={Yijia Xiao and Edward Sun and Di Luo and Wei Wang},
-      year={2025},
-      eprint={2412.20138},
-      archivePrefix={arXiv},
-      primaryClass={q-fin.TR},
-      url={https://arxiv.org/abs/2412.20138}, 
+
+## 📚 文档
+
+- [快速开始指南](docs/zh-CN/quick_start_guide.md)
+- [架构指南](docs/zh-CN/architecture_guide.md)
+- [配置指南](docs/zh-CN/configuration_guide.md)
+- [API参考](docs/zh-CN/api_reference.md)
+
+## 🤝 Contributing
+
+我们欢迎社区贡献！请查看[贡献指南](CONTRIBUTING.md)了解如何参与：
+
+1. Fork本仓库
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建Pull Request
+
+## 📄 Citation
+
+如果您在研究中使用了Rich-Agents，请引用：
+
+```bibtex
+@software{rich_agents_2025,
+  title={Rich-Agents: A Unified Multi-Agent AI Toolkit},
+  author={Turingai Team},
+  year={2025},
+  url={https://github.com/chenxingqiang/TradingAgents}
 }
 ```
+
+## 📝 许可证
+
+本项目采用MIT许可证 - 详见[LICENSE](LICENSE)文件。
+
+## 🙏 致谢
+
+感谢所有为Rich-Agents项目做出贡献的开发者和研究人员。
+
+---
+
+<div align="center">
+Made with ❤️ by Turingai Team
+</div>

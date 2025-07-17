@@ -1,0 +1,71 @@
+{
+  "version": "0.1.0",
+  "name": "Rich-Agents",
+  "description": "多智能体AI工具集",
+  "default_agent": "trading",
+  "llm_providers": {
+    "dashscope": {
+      "api_key_env": "DASHSCOPE_API_KEY",
+      "models": [
+        "qwen-turbo",
+        "qwen-plus",
+        "qwen-max",
+        "qwen-max-longcontext"
+      ],
+      "default_model": "qwen-turbo"
+    },
+    "openai": {
+      "api_key_env": "OPENAI_API_KEY",
+      "models": [
+        "gpt-4",
+        "gpt-4-turbo",
+        "gpt-3.5-turbo",
+        "gpt-4o-mini"
+      ],
+      "default_model": "gpt-4o-mini"
+    },
+    "google": {
+      "api_key_env": "GOOGLE_API_KEY",
+      "models": [
+        "gemini-pro",
+        "gemini-pro-vision",
+        "gemini-2.0-flash"
+      ],
+      "default_model": "gemini-2.0-flash"
+    },
+    "anthropic": {
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "models": [
+        "claude-3-sonnet",
+        "claude-3-haiku",
+        "claude-3-5-sonnet"
+      ],
+      "default_model": "claude-3-5-sonnet"
+    }
+  },
+  "cache": {
+    "enabled": true,
+    "type": "integrated",
+    "file_cache_dir": "cache",
+    "mongodb": {
+      "enabled": false,
+      "host": "localhost",
+      "port": 27017,
+      "database": "rich_agents",
+      "username": null,
+      "password": null
+    },
+    "redis": {
+      "enabled": false,
+      "host": "localhost",
+      "port": 6379,
+      "db": 0,
+      "password": null
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "rich_agents.log"
+  }
+}

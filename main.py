@@ -31,8 +31,14 @@ def run_trading_agent_example():
 
 def run_rich_agents_cli():
     """运行Rich-Agents统一CLI"""
-    from cli.rich_agents_main import app
-    app()
+    try:
+        # 尝试使用完整版CLI (需要typer)
+        from cli.rich_agents_main import app
+        app()
+    except ImportError:
+        # 如果typer不可用，使用简化版CLI
+        from cli.rich_agents_simple import main
+        main()
 
 
 if __name__ == "__main__":

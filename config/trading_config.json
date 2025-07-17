@@ -1,0 +1,36 @@
+{
+  "agent_type": "trading",
+  "max_debate_rounds": 2,
+  "max_risk_discuss_rounds": 2,
+  "online_tools": true,
+  "analysts": [
+    "market",
+    "social",
+    "news",
+    "fundamentals"
+  ],
+  "research_depth": 2,
+  "markets": {
+    "us_stock": {
+      "enabled": true,
+      "data_source": "yahoo_finance",
+      "api_keys": {
+        "finnhub": "FINNHUB_API_KEY"
+      }
+    },
+    "china_a_share": {
+      "enabled": true,
+      "data_source": "tongdaxin",
+      "fallback": [
+        "akshare",
+        "tushare"
+      ]
+    }
+  },
+  "risk_management": {
+    "enabled": true,
+    "max_position_size": 0.1,
+    "stop_loss": 0.05,
+    "take_profit": 0.15
+  }
+}
