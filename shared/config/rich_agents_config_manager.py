@@ -102,7 +102,7 @@ class RichAgentsConfigManager:
     def _get_default_main_config(self) -> Dict[str, Any]:
         """获取主配置默认值"""
         return {
-            "version": "0.1.0",
+            "version": "0.2.0",
             "name": "Rich-Agents",
             "description": "多智能体AI工具集",
             "default_agent": "trading",  # trading 或 patent
