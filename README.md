@@ -1,35 +1,11 @@
-<p align="center">
-  <img src="assets/TauricResearch.png" style="width: 60%; height: auto;">
-</p>
-
-<div align="center" style="line-height: 1;">
-  <a href="https://arxiv.org/abs/2412.20138" target="_blank"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2412.20138-B31B1B?logo=arxiv"/></a>
-  <a href="https://discord.com/invite/hk9PGKShPK" target="_blank"><img alt="Discord" src="https://img.shields.io/badge/Discord-TradingResearch-7289da?logo=discord&logoColor=white&color=7289da"/></a>
-  <a href="./assets/wechat.png" target="_blank"><img alt="WeChat" src="https://img.shields.io/badge/WeChat-TauricResearch-brightgreen?logo=wechat&logoColor=white"/></a>
-  <a href="https://x.com/TauricResearch" target="_blank"><img alt="X Follow" src="https://img.shields.io/badge/X-TauricResearch-white?logo=x&logoColor=white"/></a>
-  <br>
-  <a href="https://github.com/TauricResearch/" target="_blank"><img alt="Community" src="https://img.shields.io/badge/Join_GitHub_Community-TauricResearch-14C290?logo=discourse"/></a>
-</div>
-
-<div align="center">
-  <!-- Keep these links. Translations will automatically update with the README. -->
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=de">Deutsch</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=es">Español</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=fr">français</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ja">日本語</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ko">한국어</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=pt">Português</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ru">Русский</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=zh">中文</a>
-</div>
 
 ---
 
-# TradingAgents: Multi-Agents LLM Financial Trading Framework 
+# Rich-Agents: 多智能体AI工具集
 
-> 🎉 **TradingAgents** officially released! We have received numerous inquiries about the work, and we would like to express our thanks for the enthusiasm in our community.
+> 🎉 **Rich-Agents** 正式发布！基于TradingAgents成功架构，我们将其扩展为统一的多智能体AI工具集。
 >
-> So we decided to fully open-source the framework. Looking forward to building impactful projects with you!
+> Rich-Agents目前支持两个专业领域：**TradingAgent**（金融交易分析）和**PatentAgent**（专利智能体）。
 
 <div align="center">
 <a href="https://www.star-history.com/#TauricResearch/TradingAgents&Date">
@@ -43,13 +19,19 @@
 
 <div align="center">
 
-🚀 [TradingAgents](#tradingagents-framework) | ⚡ [Installation & CLI](#installation-and-cli) | 🎬 [Demo](https://www.youtube.com/watch?v=90gr5lwjIho) | 📦 [Package Usage](#tradingagents-package) | 🤝 [Contributing](#contributing) | 📄 [Citation](#citation)
+🚀 [Rich-Agents](#rich-agents-框架) | ⚡ [安装使用](#installation-and-cli) | 🏦 [TradingAgent](#tradingagent-金融交易分析) | 🔬 [PatentAgent](#patentagent-专利智能体) | 🤝 [贡献](#contributing) | 📄 [引用](#citation)
 
 </div>
 
-## TradingAgents Framework
+## Rich-Agents 框架
 
-TradingAgents is a multi-agent trading framework that mirrors the dynamics of real-world trading firms. By deploying specialized LLM-powered agents: from fundamental analysts, sentiment experts, and technical analysts, to trader, risk management team, the platform collaboratively evaluates market conditions and informs trading decisions. Moreover, these agents engage in dynamic discussions to pinpoint the optimal strategy.
+Rich-Agents是一个统一的多智能体AI工具集，目前支持两个专业领域：
+
+### 🏦 TradingAgent - 金融交易分析框架
+基于真实交易公司的运作模式，通过专业的LLM驱动智能体协作：基本面分析师、情绪专家、技术分析师、交易员、风险管理团队等，共同评估市场条件并做出交易决策。这些智能体通过动态讨论来确定最优策略。
+
+### 🔬 PatentAgent - 专利智能体系统  
+将AI技术深度应用于知识产权领域，提供专利发现、验证、分析与撰写的完整解决方案。通过技术分析师、创新发现师、先行技术研究员、专利撰写员等智能体协作，实现从创新发现到专利申请的全流程自动化。
 
 <p align="center">
   <img src="assets/schema.png" style="width: 100%; height: auto;">
@@ -91,46 +73,110 @@ Our framework decomposes complex trading tasks into specialized roles. This ensu
   <img src="assets/risk.png" width="70%" style="display: inline-block; margin: 0 2%;">
 </p>
 
-## Installation and CLI
+## 安装使用
 
-### Installation
+### 安装
 
-Clone TradingAgents:
+克隆Rich-Agents项目:
 ```bash
-git clone https://github.com/TauricResearch/TradingAgents.git
-cd TradingAgents
+git clone https://github.com/TauricResearch/Rich-Agents.git
+cd Rich-Agents
 ```
 
-Create a virtual environment in any of your favorite environment managers:
+创建虚拟环境:
 ```bash
-conda create -n tradingagents python=3.13
-conda activate tradingagents
+conda create -n rich-agents python=3.10+
+conda activate rich-agents
 ```
 
-Install dependencies:
+安装基础依赖:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Required APIs
+### 选择性安装
 
-You will also need the FinnHub API for financial data. All of our code is implemented with the free tier.
+根据需要安装特定模块:
+
 ```bash
+# 仅安装TradingAgent模块
+pip install -e ".[trading]"
+
+# 仅安装PatentAgent模块  
+pip install -e ".[patent]"
+
+# 安装中文市场支持
+pip install -e ".[chinese]"
+
+# 安装数据库支持
+pip install -e ".[database]"
+
+# 安装所有功能
+pip install -e ".[all]"
+```
+
+### API配置
+
+#### LLM提供商API密钥
+```bash
+# 百炼大模型 (推荐)
+export DASHSCOPE_API_KEY=$YOUR_DASHSCOPE_API_KEY
+
+# OpenAI
+export OPENAI_API_KEY=$YOUR_OPENAI_API_KEY
+
+# Google Gemini  
+export GOOGLE_API_KEY=$YOUR_GOOGLE_API_KEY
+
+# Anthropic Claude
+export ANTHROPIC_API_KEY=$YOUR_ANTHROPIC_API_KEY
+```
+
+#### TradingAgent专用API
+```bash
+# 金融数据
 export FINNHUB_API_KEY=$YOUR_FINNHUB_API_KEY
 ```
 
-You will need the OpenAI API for all the agents.
+#### PatentAgent专用API
 ```bash
-export OPENAI_API_KEY=$YOUR_OPENAI_API_KEY
+# Google Patents检索
+export SERPAPI_API_KEY=$YOUR_SERPAPI_API_KEY
+
+# 智慧芽专利数据
+export ZHIHUIYA_CLIENT_ID=$YOUR_ZHIHUIYA_CLIENT_ID
+export ZHIHUIYA_CLIENT_SECRET=$YOUR_ZHIHUIYA_CLIENT_SECRET
 ```
 
-### CLI Usage
+### 使用方法
 
-You can also try out the CLI directly by running:
+#### Rich-Agents统一CLI
+```bash
+python main.py
+```
+或者
+```bash
+rich-agents
+```
+
+您将看到统一的选择界面，可以选择TradingAgent或PatentAgent。
+
+#### 直接使用特定模块
+```bash
+# 直接启动TradingAgent
+rich-agents --agent trading
+
+# 直接启动PatentAgent  
+rich-agents --agent patent
+
+# 运行TradingAgent示例
+python main.py --trading-example
+```
+
+#### 传统TradingAgent CLI
 ```bash
 python -m cli.main
 ```
-You will see a screen where you can select your desired tickers, date, LLMs, research depth, etc.
 
 <p align="center">
   <img src="assets/cli/cli_init.png" width="100%" style="display: inline-block; margin: 0 2%;">
