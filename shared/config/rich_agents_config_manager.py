@@ -110,22 +110,89 @@ class RichAgentsConfigManager:
                 "dashscope": {
                     "api_key_env": "DASHSCOPE_API_KEY",
                     "models": ["qwen-turbo", "qwen-plus", "qwen-max", "qwen-max-longcontext"],
-                    "default_model": "qwen-turbo"
+                    "default_model": "qwen-turbo",
+                    "description": "阿里云百炼大模型"
                 },
                 "openai": {
                     "api_key_env": "OPENAI_API_KEY",
-                    "models": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o-mini"],
-                    "default_model": "gpt-4o-mini"
+                    "models": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini"],
+                    "default_model": "gpt-4o-mini",
+                    "description": "OpenAI GPT模型"
                 },
                 "google": {
                     "api_key_env": "GOOGLE_API_KEY",
-                    "models": ["gemini-pro", "gemini-pro-vision", "gemini-2.0-flash"],
-                    "default_model": "gemini-2.0-flash"
+                    "models": ["gemini-pro", "gemini-pro-vision", "gemini-2.0-flash", "gemini-1.5-pro"],
+                    "default_model": "gemini-2.0-flash",
+                    "description": "Google Gemini模型"
                 },
                 "anthropic": {
                     "api_key_env": "ANTHROPIC_API_KEY",
-                    "models": ["claude-3-sonnet", "claude-3-haiku", "claude-3-5-sonnet"],
-                    "default_model": "claude-3-5-sonnet"
+                    "models": ["claude-3-sonnet", "claude-3-haiku", "claude-3-5-sonnet", "claude-3-opus"],
+                    "default_model": "claude-3-5-sonnet",
+                    "description": "Anthropic Claude模型"
+                },
+                "deepseek": {
+                    "api_key_env": "DEEPSEEK_API_KEY",
+                    "models": ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"],
+                    "default_model": "deepseek-chat",
+                    "description": "DeepSeek深度求索模型",
+                    "base_url": "https://api.deepseek.com"
+                },
+                "qianwen": {
+                    "api_key_env": "QIANWEN_API_KEY",
+                    "models": ["qwen2.5-72b-instruct", "qwen2.5-32b-instruct", "qwen2.5-14b-instruct", "qwen2.5-7b-instruct"],
+                    "default_model": "qwen2.5-72b-instruct",
+                    "description": "通义千问开源模型",
+                    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
+                },
+                "doubao": {
+                    "api_key_env": "DOUBAO_API_KEY",
+                    "models": ["doubao-pro-32k", "doubao-pro-4k", "doubao-lite-32k", "doubao-lite-4k"],
+                    "default_model": "doubao-pro-32k",
+                    "description": "火山引擎豆包模型",
+                    "base_url": "https://ark.cn-beijing.volces.com/api/v3"
+                },
+                "zhipuai": {
+                    "api_key_env": "ZHIPUAI_API_KEY",
+                    "models": ["glm-4", "glm-4-plus", "glm-4-0520", "glm-4-air", "glm-4-airx", "glm-4-flash"],
+                    "default_model": "glm-4",
+                    "description": "智谱AI GLM模型",
+                    "base_url": "https://open.bigmodel.cn/api/paas/v4"
+                },
+                "baichuan": {
+                    "api_key_env": "BAICHUAN_API_KEY",
+                    "models": ["baichuan2-turbo", "baichuan2-turbo-192k", "baichuan3-turbo", "baichuan3-turbo-128k"],
+                    "default_model": "baichuan3-turbo",
+                    "description": "百川智能模型",
+                    "base_url": "https://api.baichuan-ai.com/v1"
+                },
+                "moonshot": {
+                    "api_key_env": "MOONSHOT_API_KEY",
+                    "models": ["moonshot-v1-8k", "moonshot-v1-32k", "moonshot-v1-128k"],
+                    "default_model": "moonshot-v1-8k",
+                    "description": "Moonshot AI Kimi模型",
+                    "base_url": "https://api.moonshot.cn/v1"
+                },
+                "minimax": {
+                    "api_key_env": "MINIMAX_API_KEY",
+                    "models": ["abab6.5s-chat", "abab6.5-chat", "abab5.5s-chat", "abab5.5-chat"],
+                    "default_model": "abab6.5s-chat",
+                    "description": "MiniMax海螺模型",
+                    "base_url": "https://api.minimax.chat/v1"
+                },
+                "yi": {
+                    "api_key_env": "YI_API_KEY",
+                    "models": ["yi-34b-chat-0205", "yi-34b-chat-200k", "yi-6b-chat", "yi-large"],
+                    "default_model": "yi-large",
+                    "description": "零一万物Yi模型",
+                    "base_url": "https://api.lingyiwanwu.com/v1"
+                },
+                "stepfun": {
+                    "api_key_env": "STEPFUN_API_KEY",
+                    "models": ["step-1v-8k", "step-1v-32k", "step-2-16k"],
+                    "default_model": "step-1v-8k",
+                    "description": "阶跃星辰Step模型",
+                    "base_url": "https://api.stepfun.com/v1"
                 }
             },
             "cache": {
@@ -459,4 +526,264 @@ class RichAgentsConfigManager:
             "api_keys_status": self.check_api_keys(),
             "cache_config": self.main_config.get("cache", {}),
             "version": self.main_config.get("version", "unknown")
+        }
+    
+    def set_api_key(self, env_var: str, api_key: str) -> bool:
+        """
+        设置API密钥
+        
+        Args:
+            env_var: 环境变量名
+            api_key: API密钥值
+            
+        Returns:
+            设置是否成功
+        """
+        try:
+            # 设置环境变量
+            os.environ[env_var] = api_key
+            
+            # 可以选择保存到配置文件或.env文件
+            # 这里我们只设置环境变量，不持久化到文件（安全考虑）
+            logger.info(f"API密钥已设置: {env_var}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"设置API密钥失败 {env_var}: {str(e)}")
+            return False
+    
+    def delete_api_key(self, env_var: str) -> bool:
+        """
+        删除API密钥
+        
+        Args:
+            env_var: 环境变量名
+            
+        Returns:
+            删除是否成功
+        """
+        try:
+            # 从环境变量中删除
+            if env_var in os.environ:
+                del os.environ[env_var]
+            
+            logger.info(f"API密钥已删除: {env_var}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"删除API密钥失败 {env_var}: {str(e)}")
+            return False
+    
+    def test_api_key(self, env_var: str) -> Dict[str, Any]:
+        """
+        测试API密钥
+        
+        Args:
+            env_var: 环境变量名
+            
+        Returns:
+            测试结果
+        """
+        try:
+            api_key = os.getenv(env_var)
+            if not api_key:
+                return {
+                    "success": False,
+                    "error": "API密钥未设置"
+                }
+            
+            # 基本格式验证
+            if len(api_key.strip()) < 5:
+                return {
+                    "success": False,
+                    "error": "API密钥格式不正确"
+                }
+            
+            # 这里可以添加实际的API测试调用
+            # 由于不同API的测试方式不同，这里只做基本验证
+            
+            return {
+                "success": True,
+                "details": f"API密钥格式正确，长度: {len(api_key)}"
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def get_cache_config(self) -> Dict[str, Any]:
+        """
+        获取缓存配置
+        
+        Returns:
+            缓存配置字典
+        """
+        return self.main_config.get("cache", {})
+    
+    def export_config(self, export_path: Optional[Union[str, Path]] = None) -> str:
+        """
+        导出配置到文件
+        
+        Args:
+            export_path: 导出文件路径，默认为config目录下的exported_config.json
+            
+        Returns:
+            导出文件路径
+        """
+        try:
+            if export_path is None:
+                export_path = self.config_dir / "exported_config.json"
+            else:
+                export_path = Path(export_path)
+            
+            # 准备导出的配置（不包含敏感信息）
+            export_config = {
+                "main_config": self._sanitize_config(self.main_config),
+                "trading_config": self._sanitize_config(self.trading_config),
+                "patent_config": self._sanitize_config(self.patent_config),
+                "export_timestamp": self._get_timestamp(),
+                "version": self.main_config.get("version", "unknown")
+            }
+            
+            # 保存到文件
+            with open(export_path, 'w', encoding='utf-8') as f:
+                json.dump(export_config, f, indent=2, ensure_ascii=False)
+            
+            logger.info(f"配置已导出到: {export_path}")
+            return str(export_path)
+            
+        except Exception as e:
+            logger.error(f"配置导出失败: {str(e)}")
+            raise
+    
+    def _sanitize_config(self, config: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        清理配置中的敏感信息
+        
+        Args:
+            config: 原始配置
+            
+        Returns:
+            清理后的配置
+        """
+        sanitized = config.copy()
+        
+        # 移除敏感字段
+        sensitive_keys = ["password", "secret", "key", "token"]
+        
+        def _remove_sensitive(obj):
+            if isinstance(obj, dict):
+                return {
+                    k: _remove_sensitive(v) if not any(sensitive in k.lower() for sensitive in sensitive_keys) 
+                    else "***HIDDEN***"
+                    for k, v in obj.items()
+                }
+            elif isinstance(obj, list):
+                return [_remove_sensitive(item) for item in obj]
+            else:
+                return obj
+        
+        return _remove_sensitive(sanitized)
+    
+    def _get_timestamp(self) -> str:
+        """获取当前时间戳"""
+        from datetime import datetime
+        return datetime.now().isoformat()
+    
+    def reload_config(self) -> bool:
+        """
+        重新加载所有配置文件
+        
+        Returns:
+            重新加载是否成功
+        """
+        try:
+            self.main_config = self._load_config(self.main_config_file, self._get_default_main_config())
+            self.trading_config = self._load_config(self.trading_config_file, self._get_default_trading_config())
+            self.patent_config = self._load_config(self.patent_config_file, self._get_default_patent_config())
+            
+            logger.info("配置重新加载成功")
+            return True
+            
+        except Exception as e:
+            logger.error(f"配置重新加载失败: {str(e)}")
+            return False
+    
+    def reset_config(self, config_type: str) -> bool:
+        """
+        重置配置为默认值
+        
+        Args:
+            config_type: 配置类型 ('main', 'trading', 'patent')
+            
+        Returns:
+            重置是否成功
+        """
+        try:
+            if config_type == "main":
+                self.main_config = self._get_default_main_config()
+                self._save_config(self.main_config_file, self.main_config)
+            elif config_type == "trading":
+                self.trading_config = self._get_default_trading_config()
+                self._save_config(self.trading_config_file, self.trading_config)
+            elif config_type == "patent":
+                self.patent_config = self._get_default_patent_config()
+                self._save_config(self.patent_config_file, self.patent_config)
+            else:
+                raise ValueError(f"不支持的配置类型: {config_type}")
+            
+            logger.info(f"配置已重置为默认值: {config_type}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"配置重置失败 {config_type}: {str(e)}")
+            return False
+    
+    def get_config_summary(self) -> Dict[str, Any]:
+        """
+        获取配置摘要
+        
+        Returns:
+            配置摘要信息
+        """
+        return {
+            "total_configs": 3,
+            "config_files": {
+                "main": self.main_config_file.exists(),
+                "trading": self.trading_config_file.exists(),
+                "patent": self.patent_config_file.exists()
+            },
+            "llm_providers_count": len(self.get_available_llm_providers()),
+            "api_keys_configured": sum(1 for status in self.check_api_keys().values() if status),
+            "cache_enabled": self.main_config.get("cache", {}).get("enabled", False),
+            "version": self.main_config.get("version", "unknown")
         } 
+
+    def _validate_api_key_format(self, env_var: str, key: str) -> bool:
+        """验证API密钥格式"""
+        validation_rules = {
+            "DASHSCOPE_API_KEY": lambda k: k.startswith("sk-") and len(k) > 20,
+            "OPENAI_API_KEY": lambda k: k.startswith("sk-") and len(k) > 20,
+            "GOOGLE_API_KEY": lambda k: k.startswith("AIza") and len(k) > 30,
+            "ANTHROPIC_API_KEY": lambda k: k.startswith("sk-ant-") and len(k) > 30,
+            "DEEPSEEK_API_KEY": lambda k: k.startswith("sk-") and len(k) > 20,
+            "QIANWEN_API_KEY": lambda k: len(k) > 10,  # 通义千问API密钥格式可能不同
+            "DOUBAO_API_KEY": lambda k: len(k) > 20,  # 火山引擎豆包API密钥
+            "ZHIPUAI_API_KEY": lambda k: len(k) > 30,  # 智谱AI API密钥通常较长
+            "BAICHUAN_API_KEY": lambda k: k.startswith("sk-") and len(k) > 20,
+            "MOONSHOT_API_KEY": lambda k: k.startswith("sk-") and len(k) > 30,
+            "MINIMAX_API_KEY": lambda k: len(k) > 20,  # MiniMax API密钥
+            "YI_API_KEY": lambda k: len(k) > 20,  # 零一万物API密钥
+            "STEPFUN_API_KEY": lambda k: len(k) > 20,  # 阶跃星辰API密钥
+            "FINNHUB_API_KEY": lambda k: len(k) > 10,
+            "SERPAPI_API_KEY": lambda k: len(k) > 10,
+            "ZHIHUIYA_CLIENT_ID": lambda k: len(k) > 5,
+            "ZHIHUIYA_CLIENT_SECRET": lambda k: len(k) > 10
+        }
+        
+        validator = validation_rules.get(env_var)
+        if validator:
+            return validator(key)
+        return len(key) > 5  # 默认最小长度验证 

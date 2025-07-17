@@ -77,83 +77,188 @@ class UnifiedLLMAdapter:
             return os.getenv(env_var)
         return None
     
+    def _get_available_models(self) -> Dict[str, List[str]]:
+        """获取可用模型列表"""
+        models = {}
+        
+        # 检查各个提供商的API密钥
+        if os.getenv("DASHSCOPE_API_KEY"):
+            models["dashscope"] = ["qwen-turbo", "qwen-plus", "qwen-max", "qwen-max-longcontext"]
+        
+        if os.getenv("OPENAI_API_KEY"):
+            models["openai"] = ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo", "gpt-4o", "gpt-4o-mini"]
+        
+        if os.getenv("GOOGLE_API_KEY"):
+            models["google"] = ["gemini-pro", "gemini-pro-vision", "gemini-2.0-flash", "gemini-1.5-pro"]
+        
+        if os.getenv("ANTHROPIC_API_KEY"):
+            models["anthropic"] = ["claude-3-sonnet", "claude-3-haiku", "claude-3-5-sonnet", "claude-3-opus"]
+        
+        if os.getenv("DEEPSEEK_API_KEY"):
+            models["deepseek"] = ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"]
+        
+        if os.getenv("QIANWEN_API_KEY"):
+            models["qianwen"] = ["qwen2.5-72b-instruct", "qwen2.5-32b-instruct", "qwen2.5-14b-instruct", "qwen2.5-7b-instruct"]
+        
+        if os.getenv("DOUBAO_API_KEY"):
+            models["doubao"] = ["doubao-pro-32k", "doubao-pro-4k", "doubao-lite-32k", "doubao-lite-4k"]
+        
+        if os.getenv("ZHIPUAI_API_KEY"):
+            models["zhipuai"] = ["glm-4", "glm-4-plus", "glm-4-0520", "glm-4-air", "glm-4-airx", "glm-4-flash"]
+        
+        if os.getenv("BAICHUAN_API_KEY"):
+            models["baichuan"] = ["baichuan2-turbo", "baichuan2-turbo-192k", "baichuan3-turbo", "baichuan3-turbo-128k"]
+        
+        if os.getenv("MOONSHOT_API_KEY"):
+            models["moonshot"] = ["moonshot-v1-8k", "moonshot-v1-32k", "moonshot-v1-128k"]
+        
+        if os.getenv("MINIMAX_API_KEY"):
+            models["minimax"] = ["abab6.5s-chat", "abab6.5-chat", "abab5.5s-chat", "abab5.5-chat"]
+        
+        if os.getenv("YI_API_KEY"):
+            models["yi"] = ["yi-34b-chat-0205", "yi-34b-chat-200k", "yi-6b-chat", "yi-large"]
+        
+        if os.getenv("STEPFUN_API_KEY"):
+            models["stepfun"] = ["step-1v-8k", "step-1v-32k", "step-2-16k"]
+        
+        return models
+    
     def _create_adapter(self):
         """根据提供商创建相应的适配器"""
         try:
-            if self.provider == "openai":
-                return self._create_openai_adapter()
-            elif self.provider == "dashscope":
-                return self._create_dashscope_adapter()
+            if self.provider == "dashscope":
+                from langchain_community.llms import Tongyi
+                self.llm = Tongyi(
+                    dashscope_api_key=os.getenv("DASHSCOPE_API_KEY"),
+                    model_name=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096)
+                )
+            elif self.provider == "openai":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    openai_api_key=os.getenv("OPENAI_API_KEY"),
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
             elif self.provider == "google":
-                return self._create_google_adapter()
+                from langchain_google_genai import ChatGoogleGenerativeAI
+                self.llm = ChatGoogleGenerativeAI(
+                    google_api_key=os.getenv("GOOGLE_API_KEY"),
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_output_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
             elif self.provider == "anthropic":
-                return self._create_anthropic_adapter()
+                from langchain_anthropic import ChatAnthropic
+                self.llm = ChatAnthropic(
+                    anthropic_api_key=os.getenv("ANTHROPIC_API_KEY"),
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "deepseek":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("DEEPSEEK_API_KEY"),
+                    base_url="https://api.deepseek.com",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "qianwen":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("QIANWEN_API_KEY"),
+                    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "doubao":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("DOUBAO_API_KEY"),
+                    base_url="https://ark.cn-beijing.volces.com/api/v3",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "zhipuai":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("ZHIPUAI_API_KEY"),
+                    base_url="https://open.bigmodel.cn/api/paas/v4",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "baichuan":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("BAICHUAN_API_KEY"),
+                    base_url="https://api.baichuan-ai.com/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "moonshot":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("MOONSHOT_API_KEY"),
+                    base_url="https://api.moonshot.cn/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "minimax":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("MINIMAX_API_KEY"),
+                    base_url="https://api.minimax.chat/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "yi":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("YI_API_KEY"),
+                    base_url="https://api.lingyiwanwu.com/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
+            elif self.provider == "stepfun":
+                from langchain_openai import ChatOpenAI
+                self.llm = ChatOpenAI(
+                    api_key=os.getenv("STEPFUN_API_KEY"),
+                    base_url="https://api.stepfun.com/v1",
+                    model=self.model,
+                    temperature=self.kwargs.get("temperature", 0.7),
+                    max_tokens=self.kwargs.get("max_tokens", 4096),
+                    **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
+                )
             else:
                 raise ValueError(f"不支持的LLM提供商: {self.provider}")
-        except ImportError as e:
-            raise ImportError(f"无法导入{self.provider}的依赖库: {str(e)}")
+                
+            logger.info(f"成功创建{self.provider}适配器，模型: {self.model}")
+            
         except Exception as e:
-            raise Exception(f"创建{self.provider}适配器失败: {str(e)}")
-    
-    def _create_openai_adapter(self):
-        """创建OpenAI适配器"""
-        from langchain_openai import ChatOpenAI
-        
-        return ChatOpenAI(
-            model=self.model,
-            api_key=self.api_key,
-            temperature=self.kwargs.get("temperature", 0.7),
-            max_tokens=self.kwargs.get("max_tokens", None),
-            **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
-        )
-    
-    def _create_dashscope_adapter(self):
-        """创建DashScope适配器"""
-        try:
-            # 尝试使用项目中现有的DashScope适配器
-            from tradingagents.llm_adapters.dashscope_adapter import DashScopeAdapter
-            
-            return DashScopeAdapter(
-                api_key=self.api_key,
-                model_name=self.model,
-                **self.kwargs
-            )
-        except ImportError:
-            # 如果项目适配器不可用，使用基础实现
-            import dashscope
-            from langchain_community.llms import Tongyi
-            
-            dashscope.api_key = self.api_key
-            
-            return Tongyi(
-                model_name=self.model,
-                dashscope_api_key=self.api_key,
-                temperature=self.kwargs.get("temperature", 0.7),
-                **{k: v for k, v in self.kwargs.items() if k != "temperature"}
-            )
-    
-    def _create_google_adapter(self):
-        """创建Google适配器"""
-        from langchain_google_genai import ChatGoogleGenerativeAI
-        
-        return ChatGoogleGenerativeAI(
-            model=self.model,
-            google_api_key=self.api_key,
-            temperature=self.kwargs.get("temperature", 0.7),
-            **{k: v for k, v in self.kwargs.items() if k != "temperature"}
-        )
-    
-    def _create_anthropic_adapter(self):
-        """创建Anthropic适配器"""
-        from langchain_anthropic import ChatAnthropic
-        
-        return ChatAnthropic(
-            model=self.model,
-            anthropic_api_key=self.api_key,
-            temperature=self.kwargs.get("temperature", 0.7),
-            max_tokens=self.kwargs.get("max_tokens", 4096),
-            **{k: v for k, v in self.kwargs.items() if k not in ["temperature", "max_tokens"]}
-        )
+            logger.error(f"创建{self.provider}适配器失败: {str(e)}")
+            raise
     
     def invoke(self, messages: Union[str, List[Dict[str, str]]], **kwargs) -> str:
         """
