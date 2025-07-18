@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rich-agents"
-version = "0.2.1"
+version = "0.2.2"
 description = "Rich-Agents: Unified Multi-Agent AI Toolkit - Supporting Financial Trading Analysis and Patent Intelligence Systems"
 readme = "README.md"
 license = {text = "MIT"}
@@ -130,7 +130,7 @@ all = [
 rich-agents = "cli.main:main"
 
 [tool.setuptools]
-packages = ["shared", "cli", "tradingagents", "patentagents", "tests"]
+packages = ["shared", "shared.config", "shared.llm_adapters", "shared.cache", "shared.utils", "cli", "tradingagents", "tradingagents.graph", "tradingagents.agents", "tradingagents.config", "tradingagents.dataflows", "tradingagents.api", "tradingagents.llm_adapters", "patentagents", "tests"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md", "*.json", "*.yaml", "*.yml"]
