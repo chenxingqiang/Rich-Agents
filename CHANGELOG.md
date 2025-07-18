@@ -1,83 +1,87 @@
-# Rich-Agents 更新日志
+# Rich-Agents Changelog
 
-## [0.2.0] - 2025-01-XX - LLM提供商大扩展
+## [0.2.0] - 2025-07-18 - Major LLM Provider Expansion
 
-### 🌟 重大新增
-- **新增9个国产LLM提供商支持**:
-  - DeepSeek 深度求索 (deepseek-chat, deepseek-coder, deepseek-reasoner)
-  - 通义千问 Qianwen (qwen2.5系列多规格模型)
-  - 火山引擎豆包 Doubao (pro/lite版本，支持4K/32K上下文)
-  - 智谱AI GLM (glm-4系列6个模型)
-  - 百川智能 Baichuan (baichuan2/3系列，支持192K/128K上下文)
-  - Moonshot AI Kimi (支持128K超长上下文)
-  - MiniMax 海螺 (abab系列对话模型)
-  - 零一万物 Yi (yi-large等4个模型)
-  - 阶跃星辰 Step (step-1v/step-2系列)
+### 🌟 Major Additions
+- **Added 9 new Chinese LLM providers**:
+  - DeepSeek (deepseek-chat, deepseek-coder, deepseek-reasoner)
+  - Alibaba Qianwen (qwen2.5 series multi-spec models)
+  - Bytedance Doubao (pro/lite versions, supporting 4K/32K context)
+  - Zhipu AI GLM (glm-4 series 6 models)
+  - Baichuan Intelligence (baichuan2/3 series, supporting 192K/128K context)
+  - Moonshot AI Kimi (supporting 128K ultra-long context)
+  - MiniMax Hailuo (abab series dialogue models)
+  - 01.AI Yi (yi-large and 4 other models)
+  - StepFun Step (step-1v/step-2 series)
 
-### 🔧 功能增强
-- **CLI配置界面全面升级**:
-  - 从8个API密钥配置选项扩展到17个
-  - 分组显示：LLM提供商 vs 专用数据源
-  - 新增API密钥格式验证规则
-  - 增强的帮助链接和获取指南
+### 🔧 Feature Enhancements
+- **Total LLM providers expanded from 4 to 13** (+225% increase)
+- **Total supported models expanded from 16 to 49** (+206% increase)
+- **API configuration options expanded from 8 to 17** (+112% increase)
+- **Interactive API key management**: Set, test, delete, and manage API keys
+- **Enhanced configuration validation**: Support for various provider API key formats
+- **Improved CLI interface**: Grouped display of LLM providers vs. specialized data sources
 
-- **配置管理器优化**:
-  - 更新`_get_default_main_config()`支持13个LLM提供商
-  - 增强API密钥验证逻辑
-  - 新增模型描述和base_url配置
-  - 完善错误处理和日志记录
+### 🛠️ Technical Improvements
+- **Unified LLM adapter refactoring**: Automatic model detection based on environment variables
+- **Enhanced configuration manager**: New methods for API key management and configuration
+- **Improved error handling**: Better error messages and recovery mechanisms
+- **Documentation updates**: Complete provider guides and configuration instructions
 
-- **统一LLM适配器重构**:
-  - 支持所有新增LLM提供商的适配器创建
-  - 统一的OpenAI兼容接口调用
-  - 自动API密钥检测和模型列表生成
-  - 智能错误处理和重试机制
+### 🎯 User Experience
+- **Rich CLI interface**: Enhanced visual display with provider categorization
+- **Simple CLI interface**: Streamlined text-based interface for all providers
+- **Configuration help**: Detailed help information for each provider
+- **Status monitoring**: Real-time API key status and provider availability
 
-### 📚 文档更新
-- 新增 `RICH_AGENTS_LLM_PROVIDERS_EXPANSION.md` 详细文档
-- 更新配置帮助内容，包含所有新增提供商
-- 提供详细的API密钥获取指南
-- 添加模型选择建议和使用示例
+### 📚 Documentation
+- **RICH_AGENTS_LLM_PROVIDERS_EXPANSION.md**: Comprehensive guide for all 9 new providers
+- **RICH_AGENTS_CONFIG_ENHANCEMENT.md**: Interactive configuration feature documentation
+- **Updated README.md**: Complete English translation for international users
+- **Provider-specific guides**: API acquisition, free quotas, and usage examples
 
-### 🎯 用户体验改进
-- **分类显示**: LLM提供商按国内外分组展示
-- **状态刷新**: 实时显示API密钥配置状态
-- **智能提示**: 提供每个提供商的特色说明
-- **一键配置**: 支持通过CLI快速配置所有API密钥
+### 🧪 Testing
+- **Configuration manager tests**: Comprehensive testing of new functionality
+- **CLI interface tests**: Validation of all interface improvements
+- **Integration tests**: End-to-end testing of new provider support
+- **System status checks**: Automated verification of provider loading
 
-### 🛠️ 技术改进
-- 统一的API调用接口，支持13个提供商
-- 自动识别可用的LLM提供商
-- 配置验证和格式检查
-- 性能优化和缓存机制
-
-### 📊 支持的模型统计
-- **总计**: 13个LLM提供商，49个不同模型
-- **国产提供商**: 9个 (DeepSeek, 通义千问, 豆包, 智谱AI, 百川, Moonshot, MiniMax, 零一万物, 阶跃星辰)
-- **国际提供商**: 4个 (OpenAI, Google, Anthropic, 阿里云百炼)
-- **特色模型**: 支持推理专用、代码专用、长上下文等特殊模型
-
-### 🔗 API密钥获取链接
-| 提供商 | 获取链接 | 免费额度 |
-|--------|----------|----------|
-| DeepSeek | https://platform.deepseek.com/api_keys | ✅ |
-| 通义千问 | https://help.aliyun.com/zh/dashscope/ | ✅ |
-| 豆包 | https://console.volcengine.com/ark | ✅ |
-| 智谱AI | https://open.bigmodel.cn/usercenter/apikeys | ✅ |
-| 百川智能 | https://platform.baichuan-ai.com/console/apikey | ✅ |
-| Moonshot | https://platform.moonshot.cn/console/api-keys | ✅ |
-| MiniMax | https://api.minimax.chat/user-center/basic-information/interface-key | ✅ |
-| 零一万物 | https://platform.lingyiwanwu.com/apikeys | ✅ |
-| 阶跃星辰 | https://platform.stepfun.com/interface-key | ✅ |
+### 🔄 Migration Notes
+- **Backward compatibility**: All existing configurations remain valid
+- **New environment variables**: Optional new API keys for expanded providers
+- **Configuration migration**: Automatic upgrade of existing config files
+- **No breaking changes**: Existing workflows continue to work
 
 ---
 
-## [0.1.0] - 2025-01-XX - 初始版本
+## [0.1.0] - 2024-12-XX - Initial Release
 
-### ✨ 首次发布
-- TradingAgent多智能体金融分析系统
-- PatentAgent专利发现与分析系统
-- 支持4个主流LLM提供商 (百炼、OpenAI、Google、Anthropic)
-- Rich CLI交互界面
-- 配置管理系统
-- 缓存和数据持久化 
+### 🎉 Initial Features
+- **Multi-agent AI toolkit**: Unified framework for different agent systems
+- **TradingAgent**: Financial trading analysis with multi-agent collaboration
+- **PatentAgent**: Patent intelligence system for IP management
+- **4 LLM providers**: OpenAI, Anthropic, Google, Alibaba Qianwen
+- **16 supported models**: Comprehensive model selection across providers
+- **Unified CLI**: Single interface for all agent systems
+- **Configuration management**: Flexible API key and settings management
+- **Caching system**: Three-tier caching for optimal performance
+- **Testing framework**: Comprehensive test suite for reliability
+
+### 🏦 TradingAgent Features
+- **Multi-agent collaboration**: Analysts, researchers, traders, risk managers
+- **Data source integration**: Financial data, news, social media
+- **Real-time analysis**: Live market data processing
+- **Risk management**: Portfolio monitoring and risk control
+
+### 🔬 PatentAgent Features
+- **Patent discovery**: Technology trend analysis and innovation identification
+- **Patent validation**: Prior art search and feasibility assessment
+- **Patent analysis**: Value assessment and competitive landscape
+- **Patent writing**: Automated claim generation and document formatting
+
+### 🛠️ Technical Foundation
+- **LangGraph integration**: Multi-agent orchestration framework
+- **MongoDB support**: Persistent data storage
+- **Redis caching**: High-performance data caching
+- **Modular architecture**: Extensible design for future enhancements
+- **Python packaging**: Standard PyPI distribution 

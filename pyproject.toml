@@ -4,16 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rich-agents"
-version = "0.2.0"
-description = "Rich-Agents: 统一多智能体AI工具集 - 支持金融交易分析和专利智能体"
+version = "0.2.1"
+description = "Rich-Agents: Unified Multi-Agent AI Toolkit - Supporting Financial Trading Analysis and Patent Intelligence Systems"
 readme = "README.md"
-requires-python = ">=3.10"
-license = "MIT"
+license = {text = "MIT"}
 authors = [
-    {name = "Turingai Team", email = "chenxingqiang@turingai.cc"},
+    {name = "TradingAgents Team", email = "chenxingqiang@turingai.cc"}
 ]
 maintainers = [
-    {name = "Turingai Team", email = "chenxingqiang@turingai.cc"},
+    {name = "Turingai Team", email = "chenxingqiang@turingai.cc"}
 ]
 keywords = [
     "artificial-intelligence",
@@ -30,74 +29,87 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Financial and Insurance Industry",
     "Intended Audience :: Science/Research",
-
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Office/Business :: Financial",
-    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis"
 ]
+requires-python = ">=3.10"
 dependencies = [
-    "akshare>=1.16.98",
-    "backtrader>=1.9.78.123",
-    "chainlit>=2.5.5",
-    "chromadb>=1.0.12",
-    "eodhd>=1.0.32",
-    "feedparser>=6.0.11",
-    "finnhub-python>=2.4.23",
-    "langchain-anthropic>=0.3.15",
-    "langchain-experimental>=0.3.4",
-    "langchain-google-genai>=2.1.5",
-    "langchain-openai>=0.3.23",
-    "httpx[socks]>=0.25.0",
-    "langgraph>=0.4.8",
-    "pandas>=2.3.0",
-    "parsel>=1.10.0",
-    "praw>=7.8.1",
-    "pytz>=2025.2",
-    "questionary>=2.1.0",
-    "redis>=6.2.0",
-    "requests>=2.32.4",
-    "rich>=14.0.0",
-    "setuptools>=80.9.0",
-    "stockstats>=0.6.5",
-    "tqdm>=4.67.1",
-    "tushare>=1.4.21",
-    "typing-extensions>=4.14.0",
-    "yfinance>=0.2.63",
+    "langgraph>=0.2.0",
+    "langchain-openai>=0.1.0",
+    "langchain-anthropic>=0.1.0",
+    "langchain-google-genai>=1.0.0",
+    "langchain-experimental>=0.0.50",
+    "redis>=5.0.0",
+    "rich>=13.0.0",
+    "questionary>=2.0.0",
+    "requests>=2.31.0",
+    "pandas>=2.0.0",
+    "setuptools>=61.0",
+    "typing-extensions>=4.0.0",
+    "tqdm>=4.65.0",
+    "pytz>=2023.3"
 ]
 
+[project.urls]
+Homepage = "https://github.com/chenxingqiang/TradingAgents"
+Repository = "https://github.com/chenxingqiang/TradingAgents"
+Documentation = "https://github.com/chenxingqiang/TradingAgents/blob/main/README.md"
+Issues = "https://github.com/chenxingqiang/TradingAgents/issues"
+Changelog = "https://github.com/chenxingqiang/TradingAgents/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
+# TradingAgent dependencies
 trading = [
-    "yfinance>=0.2.63",
-    "finnhub-python>=2.4.23",
-    "akshare>=1.16.98",
-    "stockstats>=0.6.5",
-    "pytdx>=1.72",
+    "yfinance>=0.2.0",
+    "finnhub-python>=2.4.0",
+    "eodhd>=1.0.0",
+    "stockstats>=0.6.0",
+    "backtrader>=1.9.0",
+    "feedparser>=6.0.0",
+    "praw>=7.7.0",
+    "parsel>=1.8.0"
 ]
+
+# PatentAgent dependencies
 patent = [
-    "google-search-results>=2.4.2",
-    "beautifulsoup4>=4.9.0",
+    "chromadb>=0.4.0",
+    "chainlit>=1.0.0"
 ]
+
+# Chinese market support
 chinese = [
-    "pytdx>=1.72",
-    "dashscope>=1.0.0",
+    "akshare>=1.12.0",
+    "tushare>=1.2.0"
 ]
+
+# Database support
 database = [
     "pymongo>=4.0.0",
-    "redis>=6.2.0",
+    "redis>=5.0.0"
 ]
+
+# Visualization support
 visualization = [
-    "streamlit>=1.28.0",
-    "plotly>=5.0.0",
+    "matplotlib>=3.7.0",
+    "plotly>=5.15.0",
+    "seaborn>=0.12.0"
 ]
+
+# CLI enhancements
 cli = [
-    "typer>=0.12.0",
-    "rich>=14.0.0",
+    "rich>=13.0.0",
+    "questionary>=2.0.0",
+    "typer>=0.9.0"
 ]
+
+# Development dependencies
 development = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
@@ -105,38 +117,20 @@ development = [
     "flake8>=6.0.0",
     "mypy>=1.0.0",
     "pre-commit>=3.0.0",
-]
-all = [
-    "yfinance>=0.2.63",
-    "finnhub-python>=2.4.23",
-    "akshare>=1.16.98",
-    "stockstats>=0.6.5",
-    "pytdx>=1.72",
-    "google-search-results>=2.4.2",
-    "beautifulsoup4>=4.9.0",
-    "dashscope>=1.0.0",
-    "pymongo>=4.0.0",
-    "redis>=6.2.0",
-    "streamlit>=1.28.0",
-    "plotly>=5.0.0",
-    "typer>=0.12.0",
+    "twine>=4.0.0",
+    "build>=0.10.0"
 ]
 
-[project.urls]
-Homepage = "https://github.com/chenxingqiang/TradingAgents"
-Repository = "https://github.com/chenxingqiang/TradingAgents"
-Documentation = "https://github.com/chenxingqiang/TradingAgents/docs"
-Issues = "https://github.com/chenxingqiang/TradingAgents/issues"
-Changelog = "https://github.com/chenxingqiang/TradingAgents/releases"
+# All dependencies
+all = [
+    "rich-agents[trading,patent,chinese,database,visualization,cli,development]"
+]
 
 [project.scripts]
-rich-agents = "cli.rich_agents_main:app"
-rich-agents-simple = "cli.rich_agents_simple:main"
-trading-agent = "cli.trading_cli:main"
-patent-agent = "cli.patent_cli:main"
+rich-agents = "cli.main:main"
 
 [tool.setuptools]
-packages = ["tradingagents", "patentagents", "shared", "shared.config", "shared.llm_adapters", "shared.cache", "shared.utils", "cli"]
+packages = ["shared", "cli", "tradingagents", "patentagents", "tests"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md", "*.json", "*.yaml", "*.yml"]
@@ -144,74 +138,17 @@ packages = ["tradingagents", "patentagents", "shared", "shared.config", "shared.
 [tool.black]
 line-length = 88
 target-version = ['py310']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  # directories
-  \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | build
-  | dist
-)/
-'''
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = [
-    "--verbose",
-    "--tb=short",
-    "--strict-markers",
-    "--disable-warnings",
-]
-markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-    "integration: marks tests as integration tests",
-    "unit: marks tests as unit tests",
-]
 
 [tool.mypy]
 python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_no_return = true
-warn_unreachable = true
-strict_equality = true
 
-[tool.coverage.run]
-source = ["tradingagents", "patentagents", "shared", "cli"]
-omit = [
-    "*/tests/*",
-    "*/test_*",
-    "*/conftest.py",
-    "*/venv/*",
-    "*/venv_*/*",
-]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if self.debug:",
-    "if settings.DEBUG",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if 0:",
-    "if __name__ == .__main__.:",
-    "class .*\\bProtocol\\):",
-    "@(abc\\.)?abstractmethod",
-]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
 
