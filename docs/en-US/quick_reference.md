@@ -1,251 +1,401 @@
-# TradingAgents Quick Reference Card
+# Rich-Agents Quick Reference Card
 
 ## 🚀 Quick Start
 
 ### 1. Change LLM Provider
-```python
-# Edit main.py
-config["llm_provider"] = "google"  # or "openai", "anthropic"
-config["backend_url"] = "https://generativelanguage.googleapis.com/v1"
-config["deep_think_llm"] = "gemini-2.0-flash"
-config["quick_think_llm"] = "gemini-2.0-flash"
+```bash
+# Interactive configuration
+rich-agents config
+
+# Select from 13+ providers:
+# 1. DashScope (Alibaba Cloud) - Chinese-optimized
+# 2. OpenAI - Industry standard
+# 3. Google AI - Multimodal capabilities
+# 4. Anthropic - Analytical depth
+# 5. Baichuan Intelligence - Long context
+# 6. Moonshot AI - Ultra-long context
+# 7. 01.AI Yi - Multimodal
+# 8. Zhipu AI GLM - Fast inference
+# 9. StepFun Step - Step-by-step reasoning
+# 10. MiniMax Hailuo - Conversational AI
+# 11. Bytedance Doubao - Enterprise-grade
+# 12. DeepSeek - Code generation
+# 13. DeepSeek (International) - Code analysis
 ```
 
-### 2. Modify Debate Rounds
-```python
-# Edit main.py or default_config.py
-config["max_debate_rounds"] = 3  # Increase to 3 rounds
-config["max_risk_discuss_rounds"] = 2  # Risk discussion 2 rounds
+### 2. Launch Rich-Agents
+```bash
+# Rich interactive CLI
+rich-agents
+
+# Simple CLI for automation
+rich-agents-simple
+
+# With specific configuration
+rich-agents --provider dashscope --model qwen-plus --depth medium
 ```
 
-### 3. Enable/Disable Online Tools
-```python
-config["online_tools"] = True   # Enable online APIs
-config["online_tools"] = False  # Use local data
+### 3. Configure Enterprise Features
+```bash
+# Enable database caching
+export MONGODB_ENABLED=true
+export REDIS_ENABLED=true
+
+# Test all configurations
+rich-agents config --test-all
 ```
 
 ## 📁 Key File Locations
 
 | Content to Modify | File Path | Specific Location |
 |------------------|-----------|-------------------|
-| **System Config** | `tradingagents/default_config.py` | Entire file |
-| **Runtime Config** | `main.py` | Lines 15-22 |
-| **Market Analyst Prompts** | `tradingagents/agents/analysts/market_analyst.py` | Lines 24-50 |
-| **Fundamentals Analyst Prompts** | `tradingagents/agents/analysts/fundamentals_analyst.py` | Lines 23-26 |
-| **News Analyst Prompts** | `tradingagents/agents/analysts/news_analyst.py` | Lines 20-23 |
-| **Social Media Analyst Prompts** | `tradingagents/agents/analysts/social_media_analyst.py` | Lines 19-22 |
-| **Bull Researcher Prompts** | `tradingagents/agents/researchers/bull_researcher.py` | Lines 25-43 |
-| **Bear Researcher Prompts** | `tradingagents/agents/researchers/bear_researcher.py` | Lines 25-43 |
-| **Trader Prompts** | `tradingagents/agents/trader/trader.py` | Lines 30-36 |
-| **Reflection System Prompts** | `tradingagents/graph/reflection.py` | Lines 15-47 |
-| **Cache Config** | `tradingagents/dataflows/cache_manager.py` | Lines 20-35 |
+| **Unified Config** | `shared/config/rich_agents_config_manager.py` | Main configuration management |
+| **CLI Interface** | `cli/rich_agents_main.py` | Rich interactive CLI |
+| **Simple CLI** | `cli/rich_agents_simple.py` | Automation-friendly CLI |
+| **LLM Adapters** | `shared/llm_adapters/unified_llm_adapter.py` | Multi-provider LLM interface |
+| **Cache Management** | `shared/cache/adaptive_cache.py` | Intelligent caching system |
+| **Database Config** | `shared/config/database_config.py` | MongoDB and Redis setup |
+| **TradingAgents Config** | `tradingagents/default_config.py` | Trading-specific settings |
+| **Market Analyst** | `tradingagents/agents/analysts/market_analyst.py` | Technical analysis prompts |
+| **Fundamentals Analyst** | `tradingagents/agents/analysts/fundamentals_analyst.py` | Financial analysis prompts |
+| **News Analyst** | `tradingagents/agents/analysts/news_analyst.py` | News sentiment analysis |
+| **Bull Researcher** | `tradingagents/agents/researchers/bull_researcher.py` | Bullish analysis prompts |
+| **Bear Researcher** | `tradingagents/agents/researchers/bear_researcher.py` | Bearish analysis prompts |
+| **Trader Agent** | `tradingagents/agents/trader/trader.py` | Trading decision prompts |
+| **Reflection System** | `tradingagents/graph/reflection.py` | Quality control prompts |
 
 ## 🎯 Common Modification Templates
 
-### 1. Professional Prompt Template
+### 1. Multi-Domain Prompt Template
 ```python
 system_message = f"""
-You are a professional {role_name} with the following characteristics:
+You are a professional {domain} {role_name} with the following characteristics:
 
-Expertise Areas:
-- {domain_1}
-- {domain_2}
-- {domain_3}
+🎯 Domain Context:
+- Professional Area: {domain} ({domain_description})
+- Expertise Level: {expertise_level}
+- Analysis Scope: {analysis_scope}
 
-Analysis Requirements:
-1. Provide detailed analysis reasoning
-2. Include risk warnings
-3. Summarize key indicators in table format
+📊 Core Responsibilities:
+1. {responsibility_1}
+2. {responsibility_2}
+3. {responsibility_3}
 
-Output Format:
-{output_format}
+🔍 Analysis Framework:
+- Data Sources: {data_sources}
+- Methodologies: {methodologies}
+- Output Format: {output_format}
 
-Important Notes:
-- Avoid simply saying "trends are mixed"
+⚠️ Important Guidelines:
 - Provide specific data support
-- Consider market-specific factors
+- Avoid generic statements
+- Include risk assessments
+- Generate actionable insights
+
+Please provide professional {domain} analysis based on these requirements.
 """
 ```
 
-### 2. Risk Control Template
+### 2. Multi-Provider Configuration Template
 ```python
-system_message = f"""
-You are a risk-conscious {role_name}.
-
-Risk Control Principles:
-1. Risk first, returns second
-2. Strict stop-loss, protect capital
-3. Diversified investment, reduce risk
-4. Data-driven, rational decisions
-
-Must Include:
-- Risk assessment level (Low/Medium/High)
-- Recommended stop-loss points
-- Maximum position suggestion
-- Risk warning description
-
-Decision Format:
-Final Recommendation: **BUY/HOLD/SELL**
-Risk Level: **Low/Medium/High**
-Stop-Loss Point: **Specific price**
-Suggested Position: **Percentage**
-"""
+provider_config = {
+    "primary_provider": "dashscope",
+    "fallback_providers": ["openai", "google", "anthropic"],
+    "provider_preferences": {
+        "chinese_content": ["dashscope", "baichuan", "moonshot"],
+        "code_analysis": ["deepseek", "openai"],
+        "long_context": ["moonshot", "baichuan", "yi"],
+        "fast_inference": ["glm", "qwen-turbo", "gemini-flash"]
+    },
+    "intelligent_routing": True,
+    "cost_optimization": True
+}
 ```
 
-### 3. Technical Analysis Template
+### 3. Enterprise Database Template
 ```python
-system_message = f"""
-You are a professional technical analyst focusing on the following indicators:
-
-Core Indicators:
-- Moving Averages: SMA, EMA
-- Momentum Indicators: RSI, MACD
-- Volatility Indicators: Bollinger Bands, ATR
-- Volume Indicators: VWMA
-
-Analysis Framework:
-1. Trend identification (Up/Down/Sideways)
-2. Support and resistance levels
-3. Buy/sell signal identification
-4. Risk-reward ratio calculation
-
-Output Requirements:
-- Clear trend judgment
-- Specific entry/exit points
-- Technical indicator divergence analysis
-- Volume-price relationship analysis
-"""
+enterprise_config = {
+    "mongodb": {
+        "enabled": True,
+        "host": "localhost",
+        "port": 27017,
+        "database": "rich_agents",
+        "collections": {
+            "trading_data": {"ttl_hours": 24},
+            "patent_data": {"ttl_hours": 168},  # 1 week
+            "analysis_results": {"ttl_hours": 72}
+        }
+    },
+    "redis": {
+        "enabled": True,
+        "host": "localhost", 
+        "port": 6379,
+        "cache_strategies": {
+            "realtime_data": {"ttl_seconds": 300},  # 5 minutes
+            "historical_data": {"ttl_seconds": 3600},  # 1 hour
+            "analysis_cache": {"ttl_seconds": 1800}   # 30 minutes
+        }
+    },
+    "intelligent_cache": {
+        "enabled": True,
+        "fallback_chain": ["redis", "mongodb", "file_cache"],
+        "adaptive_ttl": True
+    }
+}
 ```
 
 ## ⚙️ Configuration Parameters Quick Reference
 
-### LLM Configuration
+### LLM Provider Configuration
 ```python
-"llm_provider": "openai" | "google" | "anthropic"
-"deep_think_llm": "model_name"  # Deep thinking model
-"quick_think_llm": "model_name"  # Quick thinking model
-"backend_url": "API_address"
+# 13+ LLM Providers
+llm_providers = {
+    "dashscope": "qwen-turbo|qwen-plus|qwen-max|qwen-max-longcontext",
+    "openai": "gpt-4o|gpt-4o-mini|o1-preview|o1-mini|o3-mini", 
+    "google": "gemini-2.0-flash|gemini-2.5-flash|gemini-2.5-pro",
+    "anthropic": "claude-3.5-haiku|claude-3.5-sonnet|claude-4",
+    "baichuan": "baichuan2-turbo|baichuan3-turbo|baichuan3-turbo-128k",
+    "moonshot": "moonshot-v1-8k|moonshot-v1-32k|moonshot-v1-128k",
+    "yi": "yi-34b-chat|yi-large|yi-vl-plus",
+    "glm": "glm-4|glm-4-air|glm-4-flash",
+    "step": "step-1v-8k|step-1v-32k|step-2-16k-nightly",
+    "minimax": "abab6.5s-chat|abab6.5g-chat|abab6.5t-chat",
+    "doubao": "doubao-lite-4k|doubao-pro-32k",
+    "deepseek": "deepseek-chat|deepseek-coder|deepseek-reasoner"
+}
 ```
 
-#### Google Models Quick Reference
+### Domain-Specific Configuration
 ```python
-# Fast Models: gemini-2.0-flash-lite, gemini-2.0-flash ⭐, gemini-2.5-flash-preview-05-20
-# Deep Models: gemini-2.0-flash ⭐, gemini-2.5-flash-preview-05-20, gemini-2.5-pro-preview-06-05
-
-# Google API Setup
-export GOOGLE_API_KEY="your_key_here"
+domain_config = {
+    "trading": {
+        "markets": ["us_stock", "china_a_share"],
+        "data_sources": ["yahoo_finance", "tongdaxin", "finnhub"],
+        "analysis_types": ["technical", "fundamental", "sentiment"],
+        "default_depth": "medium"
+    },
+    "patent": {  # Coming Soon
+        "databases": ["uspto", "epo", "cnipa"],
+        "analysis_types": ["prior_art", "innovation", "landscape"],
+        "default_scope": "comprehensive"
+    }
+}
 ```
 
-### Debate Configuration
-```python
-"max_debate_rounds": 1-5        # Debate rounds
-"max_risk_discuss_rounds": 1-3  # Risk discussion rounds
-"max_recur_limit": 100          # Recursion limit
-```
+### API Provider Quick Setup
+```env
+# Chinese Providers
+DASHSCOPE_API_KEY=sk-xxxxxxxxxxxxxxxx
+BAICHUAN_API_KEY=sk-xxxxxxxxxxxxxxxx
+MOONSHOT_API_KEY=sk-xxxxxxxxxxxxxxxx
+YI_API_KEY=sk-xxxxxxxxxxxxxxxx
+GLM_API_KEY=xxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxx
+STEP_API_KEY=sk-xxxxxxxxxxxxxxxx
+MINIMAX_API_KEY=xxxxxxxxxxxxxxxx
+DOUBAO_API_KEY=xxxxxxxxxxxxxxxx
 
-### Tool Configuration
-```python
-"online_tools": True | False    # Whether to use online tools
-"data_cache_dir": "cache_directory_path"
-"results_dir": "results_output_directory"
-```
+# International Providers  
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
+GOOGLE_API_KEY=xxxxxxxxxxxxxxxx
+ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxx
+DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxxx
 
-### Cache Configuration
-```python
-# In cache_manager.py
-'us_stock_data': {'ttl_hours': 2}     # US stock cache 2 hours
-'china_stock_data': {'ttl_hours': 1}  # A-share cache 1 hour
+# Data Sources
+FINNHUB_API_KEY=xxxxxxxxxxxxxxxx
+ALPHA_VANTAGE_API_KEY=xxxxxxxxxxxxxxxx
+
+# Enterprise Features
+MONGODB_ENABLED=true
+REDIS_ENABLED=true
 ```
 
 ## 🔧 Common Commands
 
-### Test Configuration
+### Configuration Management
 ```bash
-# Run basic tests
-cd tests && python test_cache_manager.py
+# Interactive configuration
+rich-agents config
 
-# Run integration tests
-cd tests && python test_integration.py
+# Configure specific provider
+rich-agents config --provider dashscope
 
-# Run performance tests
-cd tests && python test_performance.py
+# Test API keys
+rich-agents config --test-all
+rich-agents config --test-provider openai
+
+# Export/Import configuration
+rich-agents config --export backup.json
+rich-agents config --import backup.json
+
+# Reset configuration
+rich-agents config --reset
 ```
 
-### Backup and Restore
+### Analysis Commands
 ```bash
-# Backup configuration files
-cp tradingagents/default_config.py tradingagents/default_config.py.backup
+# Single stock analysis
+rich-agents --symbol AAPL --provider openai --depth medium
 
-# Backup prompt files
-cp tradingagents/agents/trader/trader.py tradingagents/agents/trader/trader.py.backup
+# Batch analysis
+rich-agents batch --symbols "AAPL,TSLA,NVDA" --provider dashscope
 
-# Restore files
-cp tradingagents/default_config.py.backup tradingagents/default_config.py
+# Market comparison
+rich-agents compare --us-symbol AAPL --china-symbol 000001
+
+# Custom configuration
+rich-agents --config custom_config.json
 ```
 
-### Git Management
+### Database Management
 ```bash
-# Check modification status
-git status
+# Check database status
+rich-agents db --status
 
-# Commit configuration changes
-git add tradingagents/default_config.py
-git commit -m "feat: Update LLM configuration to Google Gemini"
+# Clear cache
+rich-agents db --clear-cache
 
-# Commit prompt changes
-git add tradingagents/agents/trader/trader.py
-git commit -m "feat: Optimize trader prompts, add risk control"
+# Database statistics
+rich-agents db --stats
+
+# Backup data
+rich-agents db --backup backup_file.json
+```
+
+### Development Commands
+```bash
+# Debug mode
+RICH_AGENTS_LOG_LEVEL=DEBUG rich-agents
+
+# Test mode
+rich-agents --test-mode
+
+# Performance profiling
+rich-agents --profile
+
+# Validate configuration
+rich-agents --validate-config
 ```
 
 ## 🚨 Important Notes
 
 ### ⚠️ Must Do Before Modification
-1. **Backup Files**: Always backup original files before modification
-2. **Test Environment**: Validate modifications in test environment
-3. **Version Control**: Use Git to track all changes
+1. **Backup Configuration**: Always backup before changes
+   ```bash
+   rich-agents config --export backup_$(date +%Y%m%d).json
+   ```
 
-### ⚠️ Common Errors
-1. **Forgot to Restart**: Need to restart application after config changes
-2. **Path Errors**: Ensure file paths are correct
-3. **Syntax Errors**: Python syntax must be correct
-4. **Encoding Issues**: Use UTF-8 encoding for content
+2. **Test Environment**: Validate in test environment first
+3. **Version Control**: Track all configuration changes
+
+### ⚠️ Common Issues and Solutions
+
+#### API Key Issues
+```bash
+# Invalid format
+Error: API key format invalid
+Solution: Check provider-specific format requirements
+
+# Rate limits
+Error: Rate limit exceeded  
+Solution: Configure multiple providers for fallback
+```
+
+#### Provider Availability
+```bash
+# Provider timeout
+Error: Provider unavailable
+Solution: System auto-fallback enabled, check network
+
+# Model not found
+Error: Model not supported
+Solution: Check available models for provider
+```
+
+#### Database Connection
+```bash
+# MongoDB connection failed
+Solution: Check Docker container and connection settings
+docker ps | grep mongodb
+
+# Redis connection failed  
+Solution: Verify Redis is running and password is correct
+redis-cli ping
+```
 
 ### ⚠️ Performance Considerations
-1. **Prompt Length**: Avoid overly long prompts (recommend <4000 tokens)
-2. **API Call Frequency**: Be aware of API call limits
-3. **Cache Settings**: Set reasonable cache TTL times
+1. **Provider Selection**: Choose appropriate models for task complexity
+2. **Cache Configuration**: Set reasonable TTL values for data types
+3. **Database Resources**: Monitor MongoDB/Redis resource usage
+4. **API Costs**: Track usage across multiple providers
 
 ## 🆘 Troubleshooting
 
-### Issue: Configuration not taking effect
+### Configuration Issues
 ```python
-# Solution: Force reload configuration
-from tradingagents.dataflows.config import reload_config
-reload_config()
+# Check current configuration
+from shared.config.rich_agents_config_manager import RichAgentsConfigManager
+config_manager = RichAgentsConfigManager()
+print(config_manager.get_config_summary())
 ```
 
-### Issue: API call failures
+### Provider Issues  
 ```python
-# Solution: Check API keys and network connection
-import os
-print("OpenAI API Key:", os.getenv("OPENAI_API_KEY", "Not set"))
-print("Google API Key:", os.getenv("GOOGLE_API_KEY", "Not set"))
+# Test provider availability
+config_manager.test_api_key("dashscope")
+config_manager.get_available_models("openai")
 ```
 
-### Issue: High memory usage
-```python
-# Solution: Enable cache cleanup
-config["cache_settings"]["cache_size_limit_mb"] = 500  # Limit cache size
-config["cache_settings"]["cache_cleanup_interval"] = 1800  # Clean every 30 minutes
+### Database Issues
+```bash
+# MongoDB connection test
+mongosh "mongodb://admin:password@localhost:27017/rich_agents"
+
+# Redis connection test  
+redis-cli -h localhost -p 6379 -a password ping
+```
+
+### Performance Issues
+```bash
+# Clear all caches
+rich-agents db --clear-cache
+
+# Check system resources
+rich-agents system --status
+
+# Provider performance stats
+rich-agents providers --stats
 ```
 
 ## 📞 Getting Help
 
-1. **View Detailed Documentation**: `docs/en-US/configuration_guide.md`
-2. **Run Tests**: Test files in `tests/` directory
-3. **View Examples**: `examples/` directory (if available)
-4. **GitHub Issues**: Submit issues in project repository
+### Documentation
+- **Architecture Guide**: System design and multi-domain framework
+- **Configuration Guide**: Detailed setup and customization
+- **Quick Start Guide**: 5-minute setup tutorial
+- **Prompt Templates**: Ready-to-use agent prompts
+
+### Support Channels
+- **GitHub Issues**: Bug reports and feature requests
+- **Documentation**: Comprehensive guides and examples
+- **Community**: User discussions and best practices
+- **API Support**: Provider-specific help and troubleshooting
+
+### Common Resources
+```bash
+# View help
+rich-agents --help
+rich-agents config --help
+rich-agents batch --help
+
+# Check version
+rich-agents --version
+
+# System information
+rich-agents system --info
+```
 
 ---
 
-💡 **Tip**: Recommend bookmarking this document for easy reference!
+💡 **Tip**: Bookmark this reference for quick access to Rich-Agents configuration and troubleshooting!
+
+🌟 **Rich-Agents**: Unified Multi-Agent AI Toolkit - Supporting 13+ LLM providers, multiple professional domains, and enterprise-grade features for comprehensive AI-powered analysis.
