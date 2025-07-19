@@ -1107,5 +1107,10 @@ def analyze():
     run_analysis()
 
 
+def main():
+    """Entry point for the rich-agents CLI."""
+    app()
+
+
 if __name__ == "__main__":
     app()

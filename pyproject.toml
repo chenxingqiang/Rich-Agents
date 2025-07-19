@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rich-agents"
-version = "0.2.3"
+version = "0.2.4"
 description = "Rich-Agents: Unified Multi-Agent AI Toolkit - Supporting Financial Trading Analysis and Patent Intelligence Systems"
 readme = "README.md"
 license = {text = "MIT"}
